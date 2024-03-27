@@ -1,8 +1,9 @@
 package com.utd.cs.cprm.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.utd.cs.cprm.model.Patient;
@@ -14,8 +15,12 @@ public class PatientSearchService {
 	@Autowired
 	private PatientsRepository patientRepo;
 	
-	public List <Patient> findAll (){
-		List <Patient> list = patientRepo.findAll();
+	public Page <Patient> getByPatientsId(String patientsId, Pageable paging) {
+		Page<Patient> list = patientRepo.findByPatientsId(patientsId, paging);
+        return list;
+	}
+	public Page <Patient> findAll (Pageable paging){
+		Page <Patient> list = patientRepo.findAll(paging);
 		return list;
 	}
 }
