@@ -56,9 +56,8 @@
 
 	<div class="block  ml-1">
 		<form th:action="@{/patientsearch}" id="searchForm">
-			<div class="container mb-1">
 
-				<div class="level-left">
+				<div class="level-left mb-1">
 					<div class="level-item">
 						<div class="field has-addons is-small">
 
@@ -100,7 +99,6 @@
 					</div>
 				</div>
 				<!-- class="level-left" -->
-			</div>
 			<!-- end class="container mb-1" -->
 		</form>
 		<div th:if="${patients != null && patients.size() > 0}">

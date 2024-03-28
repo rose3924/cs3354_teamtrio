@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+
+<body>
+	<div class="container">
+		<figure class="image">
+			<img class="image is-128x128 is-img-center"
+				th:src="@{/images/MD-record-002.png}" alt="">
+		</figure>
+	</div>
+	<div class="has-text-centered mt-3">
+		<div class="title is-1">
+			<h1>Centralized Patient Record Management</h1>
+		</div>
+		<form action="#" th:action="@{/orgverifiy}" method="post"
+			th:object="${formData}">
+			<div class="field">
+				<label class="label">Organization</label>
+				<div class="control">
+					<div class="select">
+						<select th:field="*{organizationId}">
+							<option th:each="org : ${organizations}" th:value="${org.id}"
+								th:text="${org.name}"></option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+			<div class="container">
+				<div class="field is-horizontal has-text-centered">
+					<div class="field-label is-normal">
+						<label class="label">Key</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control">
+								<input class="input" type="text" placeholder="Organization Key"
+									th:field="*{usersKeyEntry}">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mt-1">
+				<button class="button" type="submit">Verify</button>
+			</div>
+		</form>
+		<div>
+			<div th:if="${message}">
+				<div class="block  ml-1">
+					<article class="message is-warning">
+						<div class="message-header">
+							<p>Warning</p>
+							<button class="delete" aria-label="delete"></button>
+						</div>
+						<div class="message-body">
+							<p th:text="${message}"></p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+</html>
