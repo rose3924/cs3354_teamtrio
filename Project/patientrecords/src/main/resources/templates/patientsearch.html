@@ -55,50 +55,53 @@
 	<div th:replace="fragments/title :: title"></div>
 
 	<div class="block  ml-1">
+		<div th:if="${message != null}"
+			class="alert alert-success alert-dismissible fade show text-center message"
+			role="alert">[[${message}]]</div>
 		<form th:action="@{/patientsearch}" id="searchForm">
 
-				<div class="level-left mb-1">
-					<div class="level-item">
-						<div class="field has-addons is-small">
+			<div class="level-left mb-1">
+				<div class="level-item">
+					<div class="field has-addons is-small">
 
-							<div class="control">
-								<input id="keyword" type="search" name="keyword"
-									th:value="${keyword}" class="input is-small"
-									placeholder="Search PatientId">
-							</div>
-							<div class="control">
-								<button class="button is-info is-small" type="submit">
-									Search</button>
-							</div>
+						<div class="control">
+							<input id="keyword" type="search" name="keyword"
+								th:value="${keyword}" class="input is-small"
+								placeholder="Search PatientId">
 						</div>
-					</div>
-					<div class="level-item">
-						<div class="field has-addons is-small">
-							<div class="control">
-								<div class="select is-small">
-									<select form="searchForm" name="size" th:value="${pageSize}"
-										th:onchange="changePageSize()" class="size-select"
-										id="pageSize">
-										<option th:each="s : ${ {3, 6, 9, 12, 15} }" th:value="${s}"
-											th:text="${s}" th:selected="${s == pageSize}"></option>
-									</select>
-								</div>
-							</div>
-							<div class="control  ml-0">
-								<button class="button is-info is-small">Per Page</button>
-							</div>
-						</div>
-					</div>
-					<div class="level-item">
-						<div class="field is-small">
-							<div class="control ">
-								<button id="btnClear" name="btnClear" value="Clear"
-									class="button is-info is-small" th:onclick="clearSearch()">Clear</button>
-							</div>
+						<div class="control">
+							<button class="button is-info is-small" type="submit">
+								Search</button>
 						</div>
 					</div>
 				</div>
-				<!-- class="level-left" -->
+				<div class="level-item">
+					<div class="field has-addons is-small">
+						<div class="control">
+							<div class="select is-small">
+								<select form="searchForm" name="size" th:value="${pageSize}"
+									th:onchange="changePageSize()" class="size-select"
+									id="pageSize">
+									<option th:each="s : ${ {3, 6, 9, 12, 15} }" th:value="${s}"
+										th:text="${s}" th:selected="${s == pageSize}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="control  ml-0">
+							<button class="button is-info is-small">Per Page</button>
+						</div>
+					</div>
+				</div>
+				<div class="level-item">
+					<div class="field is-small">
+						<div class="control ">
+							<button id="btnClear" name="btnClear" value="Clear"
+								class="button is-info is-small" th:onclick="clearSearch()">Clear</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- class="level-left" -->
 			<!-- end class="container mb-1" -->
 		</form>
 		<div th:if="${patients != null && patients.size() > 0}">
@@ -123,6 +126,54 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="block" th:if="${totalPages > 0}">
+			<nav class="pagination is-small mt-1" role="navigation"
+				aria-label="pagination">
+				<ul class="pagination-list">
+					<li th:if="${currentPage == 1}">
+						<!-- disabled --> <a class="pagination-previous " href="#"
+						aria-label="First" disabled><<</a>
+					</li>
+					<li th:unless="${currentPage == 1}"><a
+						th:replace="fragments/paging :: paging(1, '<<', 'First', 'pagination-previous', '')">
+					</a></li>
+					<li th:if="${currentPage == 1}">
+						<!-- disabled --> <a class="pagination-previous " href="#"
+						aria-label="Previous Page" disabled><</a>
+					</li>
+					<li th:unless="${currentPage == 1}"><a
+						th:replace="fragments/paging :: paging(${currentPage - 1}, '<', 'Previous Page', 'pagination-previous', '')">
+					</a></li>
+					<li th:classappend="${page == currentPage} ? 'is-current'"
+						th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, 
+					currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+						<a
+						th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page}, 'pagination-link', ${page == currentPage ? 'is-current' : ''})">
+					</a>
+					</li>
+					<li><span class="pagination-ellipsis">…</span></li>
+					<li th:if="${currentPage == totalPages}">
+						<!-- disabled --> <a class="pagination-next " href="#"
+						aria-label="Next Page" disabled>></a>
+					</li>
+					<li th:unless="${currentPage == totalPages}"><a
+						th:replace="fragments/paging :: paging( ${currentPage + 1},'>', 'Next Page', 'pagination-next', '')"></a>
+					</li>
+					<li th:if="${currentPage == totalPages}">
+						<!-- disabled --> <a class="pagination-next " href="#"
+						aria-label="Last Page" disabled>>></a>
+					</li>
+					<li th:unless="${currentPage == totalPages}"><a
+						th:replace="fragments/paging :: paging( ${totalPages}, '>>', 'Last Page', 'pagination-next', '')"></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="content"
+			th:unless="${patients != null && patients.size() > 0}">
+			<span>No patients found!</span>
+		</div>
 	</div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

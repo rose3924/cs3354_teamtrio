@@ -49,7 +49,7 @@ public class IndexController {
         redirectView.setContextRelative(true);
         
         if(org != null) {
-        	redirectView.setUrl("patientsearch");
+        	redirectView.setUrl("home");
         }
         else {
         	redirectView.setUrl("index");
