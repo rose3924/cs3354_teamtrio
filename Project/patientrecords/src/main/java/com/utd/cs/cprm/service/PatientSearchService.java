@@ -19,6 +19,10 @@ public class PatientSearchService {
 		Page<Patient> list = patientRepo.findByPatientsId(patientsId, paging);
         return list;
 	}
+	public Page <Patient> getByPatientsIdOrLastName(String patientsId, String lastName,Pageable paging) {
+		Page<Patient> list = patientRepo.findByPatientsIdOrLastName(patientsId, lastName,paging);
+        return list;
+	}
 	public Page <Patient> findAll (Pageable paging){
 		Page <Patient> list = patientRepo.findAll(paging);
 		return list;

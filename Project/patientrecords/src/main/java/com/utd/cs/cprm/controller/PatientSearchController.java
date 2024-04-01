@@ -26,7 +26,7 @@ public class PatientSearchController {
 		Page<Patient> pagePatients;
 		try {
 			if((keyword != null) && keyword.equals("") == false) {
-				pagePatients = service.getByPatientsId(keyword, paging);
+				pagePatients = service.getByPatientsIdOrLastName(keyword, keyword,paging);
 				mav.addObject("keyword", keyword);
 			}
 			else {

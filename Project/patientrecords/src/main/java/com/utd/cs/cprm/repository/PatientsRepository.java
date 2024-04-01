@@ -12,5 +12,6 @@ import com.utd.cs.cprm.model.Patient;
 
 public interface PatientsRepository extends JpaRepository <Patient, String> {
 	Page <Patient> findByPatientsId(String patientsId, Pageable paging);
+	Page <Patient> findByPatientsIdOrLastName(String patientsId, String lastName,Pageable paging);
 	Page <Patient> findAll(Pageable paging);
 }
