@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/title :: title"></div>
+
+<div class="fixed-grid has-2-cols">
+	<div class="grid">
+		<div class="cell">
+			
+				<p class="container">
+				<figure class="image is-128x128">
+					 <img class="image"
+						th:src="@{/images/olivia_anderson.JPEG}" alt=""></figure> <span
+						class="subtitle">Olivia Anderson</span>
+				</p>
+			
+		</div>
+		<div class="cell">
+			
+				<p class="container">
+				<table>
+					<tbody>
+						<tr>
+							<td>Hometown: Allen, TX</td>
+						</tr>
+						<tr>
+							<td>Focus Area: Artificial Intelligence</td>
+						</tr>
+						<tr>
+							<td>Job Position: None</td>
+						</tr>
+						<tr>
+							<td>Fun Fact: I love baking cheesecake.</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				</p>
+		</div>
+	</div>
+</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

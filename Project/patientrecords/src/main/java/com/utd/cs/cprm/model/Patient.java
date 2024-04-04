@@ -1,6 +1,6 @@
 package com.utd.cs.cprm.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,6 @@ public class Patient {
     @Column(name="lastname", length = 35)
     private String lastName;
     
-    @Temporal(TemporalType.DATE)
     @Column (name="date_of_birth")
     private Date dateOfBirth;
     
@@ -38,7 +37,6 @@ public class Patient {
     @Column(name="insurance_group_num", length = 12)
     private String insuranceGroupNum;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="insurance_verification_date", nullable = true)
     private Date insuranceVerificationDate;
     

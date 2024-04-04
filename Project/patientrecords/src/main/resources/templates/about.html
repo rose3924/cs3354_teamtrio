@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/title :: title"></div>
+
+	<div class="mx-5 has-text-centered">
+		<p>The Centralized Patient Record Management provides an easy way
+			for patients records to be accessed during patient visits. It also
+			provides a convenient way for records to be shared between hospitals
+			registered with the application. This will help reduce the amount of
+			paperwork patients are required to fill out. This will also help
+			provide doctors a more complete picture of a patient’s medical
+			history, so they can provide higher quality health care.</p>
+		<p>The Centralized Patient Record Management application was
+			developed at the University of Texas at Dallas as part of the
+			Software Engineering CS 3354 course.</p>
+		<p class="mt-4">
+			<a th:href="@{/team}">About the developers</a>
+		</p>
+	</div>
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

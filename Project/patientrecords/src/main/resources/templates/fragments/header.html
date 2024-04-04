@@ -15,14 +15,14 @@
 		<div id="navbarMain" class="navbar-menu">
 			<div class="navbar-start"></div>
 			<div class="navbar-end">
-				<a class="navbar-item" href="#">Home</a> <a class="navbar-item"
+				<a class="navbar-item" th:href="@{/home}">Home</a> <a class="navbar-item"
 					th:href="@{/patientsearch}">Search</a>
 
 				<div class="navbar-item has-dropdown is-hoverable">
 					<a class="navbar-link"> More </a>
 
 					<div class="navbar-dropdown is-boxed">
-						<a class="navbar-item" href="#">About</a>
+						<a class="navbar-item" th:href="@{/about}">About</a>
 					</div>
 				</div>
 				<div class="navbar-item">

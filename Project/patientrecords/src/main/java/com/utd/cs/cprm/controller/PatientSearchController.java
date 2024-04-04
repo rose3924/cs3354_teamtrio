@@ -14,33 +14,38 @@ import com.utd.cs.cprm.service.PatientSearchService;
 
 @RestController
 public class PatientSearchController {
-	
+
 	@Autowired
 	private PatientSearchService service;
-	
+
 	@GetMapping("patientsearch")
 	public ModelAndView getByPatientID(@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
+			@RequestParam(value = "btnClear", required = false) String btnClear, 
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "3") int size) {
 		ModelAndView mav = new ModelAndView("patientsearch");
 		Pageable paging = PageRequest.of(page - 1, size);
 		Page<Patient> pagePatients;
 		try {
-			if((keyword != null) && keyword.equals("") == false) {
-				pagePatients = service.getByPatientsIdOrLastName(keyword, keyword,paging);
+			if ((btnClear != null) && btnClear.equals("") == false) {
+				pagePatients = service.findAll(paging);
+			} 
+			else if ((keyword != null) && keyword.equals("") == false) {
+				pagePatients = service.getByPatientsIdOrLastName(keyword, keyword, paging);
 				mav.addObject("keyword", keyword);
-			}
+			} 
 			else {
 				pagePatients = service.findAll(paging);
 			}
-			// ModelAndView::addObject;  Model::addAttribute
-            mav.addObject("patients", pagePatients.getContent());
-            mav.addObject("currentPage", pagePatients.getNumber() + 1);
-            mav.addObject("totalItems", pagePatients.getTotalElements());
-            mav.addObject("totalPages", pagePatients.getTotalPages());
-            mav.addObject("pageSize", size);
-		}catch (Exception e) {
-            mav.addObject("message", e.getMessage());
-        }
+			// ModelAndView::addObject; Model::addAttribute
+			mav.addObject("patients", pagePatients.getContent());
+			mav.addObject("currentPage", pagePatients.getNumber() + 1);
+			mav.addObject("totalItems", pagePatients.getTotalElements());
+			mav.addObject("totalPages", pagePatients.getTotalPages());
+			mav.addObject("pageSize", size);
+		} catch (Exception e) {
+			mav.addObject("message", e.getMessage());
+		}
 		return mav;
 	}
 }
