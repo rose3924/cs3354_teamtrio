@@ -1,8 +1,8 @@
-The project was written in Java 21
-Things needed to run project Eclipse and Node.js
-Only certain IP addresses can access the AWS database, so to run it I need your IP address
+<p>The project was written in Java 21</p>
+<p>Things needed to run project Eclipse and Node.js</p>
+<p>Only certain IP addresses can access the AWS database, so to run it I need your IP address</p>
 
-To Run the Project:
+To Run the Project\:
 - Open Eclipse
 - Open a new workspace with project in it
 - Click File > Import > Maven > Existing Maven Projects
@@ -17,8 +17,9 @@ To Run the Project:
 - This should tell your the port it is running on, the default is 8080, make sure the port in the link is correct
 - Paste the link below in a browser
 - http://localhost:8080/index
+
  
-Hospital Keys:
-Texas Health Presbyterian Hospital : THRPH-A-2551-747
-Allen Medical City Mckinney : MCH-DAL-4671-8476
-Medical City Dallas : MCH-MCK-4671-847
+Hospital Keys\:
+- Texas Health Presbyterian Hospital THRPH-A-2551-747
+- Allen Medical City Mckinney MCH-DAL-4671-8476
+- Medical City Dallas MCH-MCK-4671-847
