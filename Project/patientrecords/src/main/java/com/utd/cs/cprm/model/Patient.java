@@ -42,13 +42,16 @@ public class Patient {
     
 //  current_insurance_company_id    serial references insurance_company(id),
     @Column(name="social_security_num")
-    private String socialSecurityNum;
+    private String socialSecurityNumber;
 
     @Column(name="home_phone")
     private String homePhone;
 
     @Column(name="street_address", length = 100)
     private String streetAddress;
+    
+    @Column(name="city", length = 35)
+    private String city;
 
     @Column(name="zip_code", length = 10)
     private String zipCode;
@@ -58,9 +61,12 @@ public class Patient {
 
     public Patient() {}
     
+	
+
 	public Patient(String patientsId, String gender, String firstName, String middleName, String lastName,
 			Date dateOfBirth, String insuranceMemberId, String insuranceGroupNum, Date insuranceVerificationDate,
-			String socialSecurityNum, String homePhone, String streetAddress, String zipCode, String stateShort) {
+			String socialSecurityNumber, String homePhone, String streetAddress, String city, String zipCode,
+			String stateShort) {
 		super();
 		this.patientsId = patientsId;
 		this.gender = gender;
@@ -71,12 +77,15 @@ public class Patient {
 		this.insuranceMemberId = insuranceMemberId;
 		this.insuranceGroupNum = insuranceGroupNum;
 		this.insuranceVerificationDate = insuranceVerificationDate;
-		this.socialSecurityNum = socialSecurityNum;
+		this.socialSecurityNumber = socialSecurityNumber;
 		this.homePhone = homePhone;
 		this.streetAddress = streetAddress;
+		this.city = city;
 		this.zipCode = zipCode;
 		this.stateShort = stateShort;
 	}
+
+
 
 	public String getPatientsId() {
 		return patientsId;
@@ -150,12 +159,12 @@ public class Patient {
 		this.insuranceVerificationDate = insuranceVerificationDate;
 	}
 
-	public String getSocialSecurityNum() {
-		return socialSecurityNum;
+	public String getSocialSecurityNumber() {
+		return socialSecurityNumber;
 	}
 
-	public void setSocialSecurityNum(String socialSecurityNum) {
-		this.socialSecurityNum = socialSecurityNum;
+	public void setSocialSecurityNumber(String socialSecurityNum) {
+		this.socialSecurityNumber = socialSecurityNum;
 	}
 
 	public String getHomePhone() {
@@ -188,6 +197,16 @@ public class Patient {
 
 	public void setStateShort(String stateShort) {
 		this.stateShort = stateShort;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+	public void setCity(String city) {
+		this.city = city;
 	}
     
     

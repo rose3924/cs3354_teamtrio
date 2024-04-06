@@ -16,43 +16,32 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div th:replace="fragments/title :: title"></div>
 
-<div class="fixed-grid has-2-cols">
-	<div class="grid">
-		<div class="cell">
-			
-				<p class="container">
-				<figure class="image is-128x128">
-					 <img class="image"
-						th:src="@{/images/olivia_anderson.JPEG}" alt=""></figure> <span
-						class="subtitle">Olivia Anderson</span>
-				</p>
-			
-		</div>
-		<div class="cell">
-			
-				<p class="container">
-				<table>
-					<tbody>
-						<tr>
-							<td>Hometown: Allen, TX</td>
-						</tr>
-						<tr>
-							<td>Focus Area: Artificial Intelligence</td>
-						</tr>
-						<tr>
-							<td>Job Position: None</td>
-						</tr>
-						<tr>
-							<td>Fun Fact: I love baking cheesecake.</td>
-						</tr>
-					</tbody>
-				</table>
+	<div class="fixed-grid has-6-cols mb-2 ml-3 mt-4">
+		<div class="grid is-gap-5.5 ">
+			<div class="cell">
+				<span></span>
+			</div>
+			<div class="cell is-col-span-2 box">
+				<figure>
+					<img class="image" width="254" height="254"
+						th:src="@{/images/olivia_anderson.JPEG}" alt="">
+				</figure>
+				<span class="subtitle">Olivia Anderson</span>
 
-
-				</p>
+			</div>
+			<div class="cell is-col-span-2 box is-size-6">
+				<block class="is-size-5 is-vcentered">
+				<p>Hometown: Allen, TX</p>
+				<p>Focus Area: Artificial Intelligence</p>
+				<p>Job Position: None</p>
+				<p>Fun Fact: I love baking cheesecake.</p>
+				</block>
+			</div>
+			<div class="cell">
+				<span></span>
+			</div>
 		</div>
 	</div>
-</div>
 
 	<div th:replace="fragments/footer :: footer"></div>
 </body>

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="container mx-1 box"
+	th:fragment="patientInformation(formData)">
+	<div class="grid">
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Patient ID</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" th:field="*{patient.patientsId}"
+						placeholder="Patient ID" disabled>
+				</div>
+			</div>
+		</div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+
+	</div>
+	<div class="grid">
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Last Name</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="Last Name"
+						th:field="*{patient.lastName}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Middle Name</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="Middle Name"
+						th:field="*{patient.middleName}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">First Name</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="First Name"
+						th:field="*{patient.firstName}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Date of Birth</label>
+				</div>
+				<div class="control">
+					<input class="input" type="Date" th:field="*{patient.dateOfBirth}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- SS and phone columns  -->
+	<div class="grid">
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Phone</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="XXX-XXX-XXXX"
+						th:field="*{patient.homePhone}">
+				</div>
+			</div>
+		</div>
+		<div class="cell"></div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Social Security</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="XXX-XX-XXXX"
+						th:field="*{patient.socialSecurityNumber}">
+				</div>
+			</div>
+		</div>
+		<div class="cell ">
+			<div class="field-group">
+				<div class="field">
+					<div class="field-label is-small has-text-left">
+						<label class="label">Legal Sex</label>
+					</div>
+					<div class="control">
+						<div class="select">
+							<select th:field="*{patient.gender}">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+								<option value="Transgender">Transgender</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- address -->
+	<div class="grid">
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Address</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="104 Sunrise Ln"
+						th:field="*{patient.streetAddress}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">City</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="Richardson"
+						th:field="*{patient.city}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">State</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="TX"
+						th:field="*{patient.stateShort}">
+				</div>
+			</div>
+		</div>
+		<div class="cell">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Zip</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="XXXXX"
+						th:field="*{patient.zipCode}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
