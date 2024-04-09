@@ -4,10 +4,11 @@ import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="patients")
@@ -40,6 +41,10 @@ public class Patient {
     @Column(name="insurance_verification_date", nullable = true)
     private Date insuranceVerificationDate;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "current_insurance_company_id")
+    private InsuranceCompany currentInsuranceCompany;
+    
 //  current_insurance_company_id    serial references insurance_company(id),
     @Column(name="social_security_num")
     private String socialSecurityNumber;
@@ -61,12 +66,13 @@ public class Patient {
 
     public Patient() {}
     
-	
+
+
 
 	public Patient(String patientsId, String gender, String firstName, String middleName, String lastName,
 			Date dateOfBirth, String insuranceMemberId, String insuranceGroupNum, Date insuranceVerificationDate,
-			String socialSecurityNumber, String homePhone, String streetAddress, String city, String zipCode,
-			String stateShort) {
+			InsuranceCompany currentInsuranceCompany, String socialSecurityNumber, String homePhone,
+			String streetAddress, String city, String zipCode, String stateShort) {
 		super();
 		this.patientsId = patientsId;
 		this.gender = gender;
@@ -77,6 +83,7 @@ public class Patient {
 		this.insuranceMemberId = insuranceMemberId;
 		this.insuranceGroupNum = insuranceGroupNum;
 		this.insuranceVerificationDate = insuranceVerificationDate;
+		this.currentInsuranceCompany = currentInsuranceCompany;
 		this.socialSecurityNumber = socialSecurityNumber;
 		this.homePhone = homePhone;
 		this.streetAddress = streetAddress;
@@ -86,6 +93,14 @@ public class Patient {
 	}
 
 
+
+	public InsuranceCompany getCurrentInsuranceCompany() {
+		return currentInsuranceCompany;
+	}
+
+	public void setCurrentInsuranceCompany(InsuranceCompany currentInsuranceCompany) {
+		this.currentInsuranceCompany = currentInsuranceCompany;
+	}
 
 	public String getPatientsId() {
 		return patientsId;

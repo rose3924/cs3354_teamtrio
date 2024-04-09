@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="container mx-1 box"
+	th:fragment="insuranceInformation( formData, insurancecompanies)">
+
+	<div class="columns">
+		<div class="column">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Insurance Companies</label>
+				</div>
+				<div class="control">
+					<div class="select">
+						<select th:field="*{patient.currentInsuranceCompany.id}">
+							<option th:each="company : ${insurancecompanies}"
+								th:value="${company.id}" th:text="${company.name}"></option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="field ">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Verification Date</label>
+				</div>
+				<div class="control">
+                    <input class="input" type="date"
+                        th:field="*{patient.insuranceVerificationDate}">
+                </div>
+			</div>
+		</div>
+		<div class="column">
+		<div class="field ">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Member ID</label>
+				</div>
+				<div class="control">
+                    <input class="input" type="text"
+                        th:field="*{patient.insuranceMemberId}">
+                </div>
+			</div>
+		</div>
+		<div class="column">
+		<div class="field ">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Group ID</label>
+				</div>
+				<div class="control">
+                    <input class="input" type="text"
+                        th:field="*{patient.insuranceGroupNum}">
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
