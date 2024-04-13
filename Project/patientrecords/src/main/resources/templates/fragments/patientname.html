@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container mx-1 box"
+	th:fragment="patientname(formData)">
+	<!-- Name columns  -->
+	<div class="columns ">
+		<div class="column ">
+			<div class="field">
+				<div class="field-label is-small has-text-left">
+					<label class="label">Last Name</label>
+				</div>
+				<div class="control">
+					<input class="input" type="text" placeholder="Lamperouge"
+						th:field="${formData.patient.lastName}">
+				</div>
+			</div>
+		</div>
+
+		<div class="column ">
+			<div class="field-group">
+				<div class="field">
+					<div class="field-label is-small has-text-left">
+						<label class="label">First Name</label>
+					</div>
+					<div class="control">
+						<input class="input" type="text" placeholder="Lelouch"
+							th:field="${formData.patient.firstName}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column is-2">
+			<div class="field-group">
+				<div class="field ">
+					<div class="field-label is-small has-text-left">
+						<label class="label">Date of Birth</label>
+					</div>
+					<div class="control">
+						<input class="input" type="date"
+							th:field="*{formData.patient.dateOfBirth}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

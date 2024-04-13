@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div
+	th:fragment="pagenavigation( pageNum, label, tooltip, classname, iscurrent)">
+
+	<div class="block" th:if="${totalPages > 0}">
+		<nav class="pagination is-small mt-1" role="navigation"
+			aria-label="pagination">
+			<ul class="pagination-list">
+				<li th:if="${currentPage == 1}">
+					<!-- disabled --> <a class="pagination-previous " href="#"
+					aria-label="First" disabled><<</a>
+				</li>
+				<li th:unless="${currentPage == 1}"><a
+					th:replace="fragments/paging :: paging(1, '<<', 'First', 'pagination-previous', '')">
+				</a></li>
+				<li th:if="${currentPage == 1}">
+					<!-- disabled --> <a class="pagination-previous " href="#"
+					aria-label="Previous Page" disabled><</a>
+				</li>
+				<li th:unless="${currentPage == 1}"><a
+					th:replace="fragments/paging :: paging(${currentPage - 1}, '<', 'Previous Page', 'pagination-previous', '')">
+				</a></li>
+				<li th:classappend="${page == currentPage} ? 'is-current'"
+					th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, 
+					currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+					<a
+					th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page}, 'pagination-link', ${page == currentPage ? 'is-current' : ''})">
+				</a>
+				</li>
+				<li><span class="pagination-ellipsis">…</span></li>
+				<li th:if="${currentPage == totalPages}">
+					<!-- disabled --> <a class="pagination-next " href="#"
+					aria-label="Next Page" disabled>></a>
+				</li>
+				<li th:unless="${currentPage == totalPages}"><a
+					th:replace="fragments/paging :: paging( ${currentPage + 1},'>', 'Next Page', 'pagination-next', '')"></a>
+				</li>
+				<li th:if="${currentPage == totalPages}">
+					<!-- disabled --> <a class="pagination-next " href="#"
+					aria-label="Last Page" disabled>>></a>
+				</li>
+				<li th:unless="${currentPage == totalPages}"><a
+					th:replace="fragments/paging :: paging( ${totalPages}, '>>', 'Last Page', 'pagination-next', '')"></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
+</div>
+</html>

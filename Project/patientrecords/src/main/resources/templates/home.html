@@ -12,8 +12,8 @@
 	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
-	<div th:replace="fragments/title :: title"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/title :: title}"></div>
 
 	<div class="grid mx-4 is-gap-6">
 		<div class="cell box">
@@ -69,6 +69,6 @@
 			</p>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
