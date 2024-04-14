@@ -13,14 +13,134 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	<div th:replace="fragments/title :: title"></div>
+	
+	<h3 class="title is-3 ml-2 has-text-centered">Patient Visit Form</h3>
 
-	<div class="content" th:unless="${patient == null}">
-		<span>Patient Id required!</span>
-	</div>
 	<div class="container ">
 		<div th:replace="~{fragments/patientname :: patientname(formData)}"></div>
-
+		<form th:action="@{/registervisitrecord}" method="post"
+			th:object="${formData}">
+			<input class="input" type="hidden" th:field="*{record.patient.patientsId}">
+			<div class="container mx-1 box">
+				<div class="columns ">
+					<div class="column is-one-fifth">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Temperature</label>
+							</div>
+							<div class="control">
+								<input class="input" type="number" step="0.01" placeholder="Temperature"
+									th:field="*{record.temperature}">
+							</div>
+						</div>
+					</div>
+					<div class="column is-one-fifth">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Weight</label>
+							</div>
+							<div class="control">
+								<input class="input" type="number" step="0.01" placeholder="Weight"
+									th:field="*{record.weight}">
+							</div>
+						</div>
+					</div>
+					<div class="column is-2">
+						<div class="field ">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Visit Date</label>
+							</div>
+							<div class="control">
+								<input class="input" type="date" th:field="*{record.visitDate}">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="columns mx-1">
+					<div class="column">
+						<div class="field">
+							<label class="label">Doctor</label>
+							<div class="control">
+								<div class="select">
+									<select id="doctor" th:field="*{record.doctor.login}">
+										<option th:each="u : ${userList}" th:value="${u.login}"
+											th:text="${u.lastName}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label class="label">Nurse</label>
+							<div class="control">
+								<div class="select">
+									<select id="nurse" th:field="*{record.nurse.login}">
+										<option th:each="u : ${userList}" th:value="${u.login}"
+											th:text="${u.lastName}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="columns ">
+					<div class="column">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Description</label>
+							</div>
+							<div class="control">
+								<textarea class="textarea" rows="3"
+									th:field="*{record.description}">
+							</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Symptoms</label>
+							</div>
+							<div class="control">
+								<textarea class="textarea" rows="3"
+									th:field="*{record.symptoms}">
+							</textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="columns ">
+					<div class="column">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Doctor Analysis</label>
+							</div>
+							<div class="control">
+								<textarea class="textarea" rows="3"
+									th:field="*{record.doctorAnalysis}"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="columns ">
+					<div class="column">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Nurse Comments</label>
+							</div>
+							<div class="control">
+								<textarea class="textarea" rows="3"
+									th:field="*{record.nurseComments}"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="has-text-centered mt-1">
+				<button class="button" type="submit">Save</button>
+			</div>
+		</form>
 	</div>
 
 	<div th:replace="~{fragments/footer :: footer}"></div>
