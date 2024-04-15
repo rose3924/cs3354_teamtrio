@@ -1,18 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
-    <title>Centralized Patient Record Management</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
 
-<<<<<<< Updated upstream
 	<div class="container ">
 		<h3 class="title is-3 ml-2">Patient Information</h3>
 		<div th:if="${warningmessage}">
@@ -41,45 +42,8 @@
 			</div>
 		</form>
 	</div>
-=======
-    <div class="container">
-        <h3 class="title is-3 ml-2">New Medical Personnel Registration</h3>
->>>>>>> Stashed changes
 
-        <form th:action="@{/registerMedicalPersonnel}" method="post" th:object="${medicalPersonnel}" onsubmit="return validateForm()">
-            <!-- Form Fields -->
-            <!-- ... (same form fields as provided in the previous example) ... -->
 
-            <div class="columns mt-3">
-                <div class="column is-full has-text-centered">
-                    <button class="button" type="submit">Register</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div th:replace="~{fragments/footer :: footer}"></div>
-
-    <!-- Validation Script -->
-    <script>
-        function validateForm() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var email = document.getElementById("email").value;
-
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
-                return false;
-            }
-
-            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailRegex.test(email)) {
-                alert("Please enter a valid email address!");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
+	<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

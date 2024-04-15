@@ -97,9 +97,8 @@ import jakarta.servlet.http.HttpServletRequest;
                     formData.getPatient().setCurrentInsuranceCompany(c.get());
                 }
                 if (p != null) {
-                	//redirectView.setUrl("/newpatient?patientsid='" + p.getPatientsId() + "'");
-                    //model.addFlashAttribute("warningmessage", "Patient already exists.");
-                	searchService.savePatient(formData.getPatient());
+                	redirectView.setUrl("/newpatient?patientsid='" + p.getPatientsId() + "'");
+                    model.addFlashAttribute("warningmessage", "Patient already exists.");
                 }
                 else {
                 	searchService.savePatient(formData.getPatient());
