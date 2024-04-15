@@ -36,8 +36,15 @@ public class User {
 		super();
 	}
 
+<<<<<<< HEAD
 	public User(String login, String firstName, String lastName, String userRole, Organization organization,
 			String enabled) {
+=======
+	
+
+	public User(String login, String password, String firstName, String lastName, String userRole,
+			Organization organization, String enabled) {
+>>>>>>> parent of 0762306 (Megha)
 		super();
 		this.login = login;
 		this.firstName = firstName;
