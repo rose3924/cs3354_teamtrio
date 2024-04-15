@@ -139,6 +139,10 @@
 							th:href="@{/patientvisitform?keyword=} + ${record.patient.patientsId}"
 							class="btn btn-primary"> <span class="icon is-medium"><i
 									class="fas fa-user-md"></i></span></a></td>
+						<td><a
+							th:href="@{/intakeform?keyword=} + ${record.patient.patientsId}"
+							class="btn btn-primary"> <span class="icon is-medium"><i
+									class="fas fa-stream"></i></span></a></td>
 					</tr>
 				</tbody>
 			</table>

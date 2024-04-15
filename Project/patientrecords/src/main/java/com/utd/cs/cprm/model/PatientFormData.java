@@ -8,6 +8,8 @@ public class PatientFormData {
     private Record r;
     private String userLogin;
     
+    private String patientcomments;
+    private String patientsrelativeconditions;
     
     public PatientFormData() {}
 
@@ -39,5 +41,17 @@ public class PatientFormData {
 		this.userLogin = userLogin;
 	}
     
-    
+	public String getPatientComments() {
+        return patientcomments;
+    }
+    public void setPatientComments(String x) {
+        this.patientcomments = x;
+    }
+
+    public String getPatientsRelativeConditions() {
+        return patientsrelativeconditions;
+    }
+    public void setPatientsRelativeConditions(String x) {
+        this.patientsrelativeconditions = x;
+    }
 }
