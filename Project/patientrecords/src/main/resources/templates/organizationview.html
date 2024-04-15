@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<script type="text/javascript">
+	function changePageSize() {
+		$("#searchForm").submit();
+	}
+</script>
+
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+
+		// Get all "navbar-burger" elements
+		var $navbarBurgers = Array.prototype.slice.call(document
+				.querySelectorAll('.navbar-burger'), 0);
+
+		// Check if there are any navbar burgers
+		if ($navbarBurgers.length > 0) {
+
+			// Add a click event on each of them
+			$navbarBurgers.forEach(function($el) {
+				$el.addEventListener('click', function() {
+
+					// Get the target from the "data-target" attribute
+					var target = $el.dataset.target;
+					var $target = document.getElementById(target);
+
+					// Toggle the class on both the "navbar-burger" and the "navbar-menu"
+					$el.classList.toggle('is-active');
+					$target.classList.toggle('is-active');
+
+				});
+			});
+		}
+
+	});
+</script>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/title :: title"></div>
+
+	<div class = "container">
+		<b >[[${organization.name}]]</b>
+		<p>[[${organization.description}]]</p>
+		<p>Phone Number: [[${organization.phone}]]</p>
+		<p>Key: [[${organization.organizationKey}]]</p>
+		<p>Address: [[${organization.businessAddress}]]</p>
+		<p>City: [[${organization.city}]]</p>
+		<p>State: [[${organization.state}]]</p>
+		<p>Zip Code: [[${organization.zipCode}]]</p>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
