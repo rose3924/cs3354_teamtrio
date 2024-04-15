@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport"
@@ -7,12 +8,24 @@
 <title>Centralized Patient Record Management</title>
 
 <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<link rel="stylesheet"
+	href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script type="text/javascript"
 	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		// ...
+
+		$("#btnClear").on("click", function(e) {
+			e.preventDefault();
+			$("#keyword").text("");
+			window.location.href = "[[@{/patientvisitrecords}]]";
+		});
+	});
+
 	function changePageSize() {
 		$("#searchForm").submit();
 	}
@@ -48,17 +61,30 @@
 </script>
 
 <body>
-	<div th:replace="fragments/header :: header"></div>
-	<div th:replace="fragments/title :: title"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/title :: title}"></div>
+
+	<h3 class="title is-3 ml-2 has-text-centered">Patient Records</h3>
 
 	<div class="block  ml-1">
 		<div th:if="${message != null}"
 			class="alert alert-success alert-dismissible fade show text-center message"
 			role="alert">[[${message}]]</div>
-		<form th:action="@{/patientview}" id="searchForm">
 
+		<form th:action="@{/patientvisitrecords}" id="searchForm">
 			<div class="level-left mb-1">
+				<div class="level-item">
+					<div class="field has-addons is-small">
+						<div class="control">
+							<input id="keyword" type="search" name="keyword"
+								th:value="${keyword}" class="input is-small">
+						</div>
+						<div class="control">
+							<button class="button is-info is-small" type="submit">Search</button>
+						</div>
+					</div>
 
+				</div>
 				<div class="level-item">
 					<div class="field has-addons is-small">
 						<div class="control">
@@ -76,29 +102,43 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="level-item">
+					<div class="field is-small">
+						<div class="control ">
+							<button id="btnClear" name="btnClear" value="clear"
+								class="button is-small is-info">Clear</button>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-- class="level-left" -->
-			<!-- end class="container mb-1" -->
 		</form>
-		<div th:if="${patients != null && patients.size() > 0}">
+
+
+		<div th:if="${records != null && records.size() > 0}">
 			<table class="table is-bordered is-striped">
 				<thead class="thead-light">
 					<tr>
-						<th scope="col">Patient Id</th>
+						<th scope="col">Visit Date</th>
 						<th scope="col">Last Name</th>
-						<th scope="col">First Name</th>
-						<th scope="col">Street Address</th>
-						<th scope="col">Phone</th>
+						<th scope="col">Temperature</th>
+						<th scope="col">Weight</th>
+						<th scope="col">Nurse</th>
+						<th scope="col">Doctor</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="patient : ${patients}">
-						<th scope="row">[[${patient.patientsId}]]</th>
-						<td>[[${patient.lastName}]]</td>
-						<td>[[${patient.firstName}]]</td>
-						<td>[[${patient.streetAddress}]]</td>
-						<td>[[${patient.homePhone}]]</td>
+					<tr th:each="record : ${records}">
+						<th scope="row">[[${record.visitDate}]]</th>
+						<td>[[${record.patient.lastName}]]</td>
+						<td>[[${record.temperature}]]</td>
+						<td>[[${record.weight}]]</td>
+						<td>[[${record.nurse.lastName}]]</td>
+						<td>[[${record.doctor.lastName}]]</td>
+						<td><a
+							th:href="@{/patientvisitform?keyword=} + ${record.patient.patientsId}"
+							class="btn btn-primary"> <span class="icon is-medium"><i
+									class="fas fa-user-md"></i></span></a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -112,20 +152,20 @@
 						aria-label="First" disabled><<</a>
 					</li>
 					<li th:unless="${currentPage == 1}"><a
-						th:replace="fragments/paging :: paging(1, '<<', 'First', 'pagination-previous', '', 'patientview')">
+						th:replace="fragments/paging :: paging(1, '<<', 'First', 'pagination-previous', '', 'patientvisitrecords')">
 					</a></li>
 					<li th:if="${currentPage == 1}">
 						<!-- disabled --> <a class="pagination-previous " href="#"
 						aria-label="Previous Page" disabled><</a>
 					</li>
 					<li th:unless="${currentPage == 1}"><a
-						th:replace="fragments/paging :: paging(${currentPage - 1}, '<', 'Previous Page', 'pagination-previous', '', 'patientview')">
+						th:replace="fragments/paging :: paging(${currentPage - 1}, '<', 'Previous Page', 'pagination-previous', '', 'patientvisitrecords')">
 					</a></li>
 					<li th:classappend="${page == currentPage} ? 'is-current'"
 						th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, 
 					currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
 						<a
-						th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page}, 'pagination-link', ${page == currentPage ? 'is-current' : ''}, 'patientview')">
+						th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page}, 'pagination-link', ${page == currentPage ? 'is-current' : ''}, 'patientvisitrecords')">
 					</a>
 					</li>
 					<li><span class="pagination-ellipsis">…</span></li>
@@ -134,23 +174,29 @@
 						aria-label="Next Page" disabled>></a>
 					</li>
 					<li th:unless="${currentPage == totalPages}"><a
-						th:replace="fragments/paging :: paging( ${currentPage + 1},'>', 'Next Page', 'pagination-next', '', 'patientview')"></a>
+						th:replace="fragments/paging :: paging( ${currentPage + 1},'>', 'Next Page', 'pagination-next', '', 'patientvisitrecords')"></a>
 					</li>
 					<li th:if="${currentPage == totalPages}">
 						<!-- disabled --> <a class="pagination-next " href="#"
 						aria-label="Last Page" disabled>>></a>
 					</li>
 					<li th:unless="${currentPage == totalPages}"><a
-						th:replace="fragments/paging :: paging( ${totalPages}, '>>', 'Last Page', 'pagination-next', '', 'patientview')"></a>
+						th:replace="fragments/paging :: paging( ${totalPages}, '>>', 'Last Page', 'pagination-next', '', 'patientvisitrecords')"></a>
 					</li>
 				</ul>
 			</nav>
 		</div>
+
 		<div class="content"
-			th:unless="${patients != null && patients.size() > 0}">
+			th:unless="${records != null && records.size() > 0}">
 			<span>No patients found!</span>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer"></div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+
 </body>
+
+
 </html>

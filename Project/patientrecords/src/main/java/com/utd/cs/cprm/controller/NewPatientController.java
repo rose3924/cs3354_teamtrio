@@ -61,8 +61,34 @@ import jakarta.servlet.http.HttpServletRequest;
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
         redirectView.setUrl("/home");
+        try {
+            boolean validData = true;
         if( formData.getPatient() != null) {
             String ss = formData.getPatient().getSocialSecurityNumber();
+            if(ss.equals("")) {
+                model.addFlashAttribute("warningmessage", "Social Security Number should not be emtpy");
+                validData = false;
+                redirectView.setUrl("/newpatient");
+            }
+            if(ss.length() > 12) {
+                model.addFlashAttribute("warningmessage", "Social Security Number should not be emtpy");
+                validData = false;
+                redirectView.setUrl("/newpatient");
+            }
+            String fName = formData.getPatient().getFirstName();
+            if(fName.equals("")) {
+                model.addFlashAttribute("warningmessage", "First name should not be emtpy");
+                validData = false;
+                redirectView.setUrl("/newpatient");
+            }
+            String lName = formData.getPatient().getLastName();
+            if(lName.equals("")) {
+                model.addFlashAttribute("warningmessage", "Last name should not be emtpy");
+                validData = false;
+                redirectView.setUrl("/newpatient");
+            }
+            if(validData)
+            {
             if(ss != null && ss.equals("") == false) {
             	Patient p = searchService.getBySocialSecurityNumber(ss);
             	Long icompanyId = formData.getPatient().getCurrentInsuranceCompany().getId();
@@ -78,6 +104,10 @@ import jakarta.servlet.http.HttpServletRequest;
                 	searchService.savePatient(formData.getPatient());
                 }
             }
+            }
+        }
+        } catch (Exception e) {
+            model.addFlashAttribute("warningmessage", e.getMessage());
         }
         return redirectView;
 	}

@@ -1,6 +1,7 @@
 package com.utd.cs.cprm.repository;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import com.utd.cs.cprm.model.Record;
 public interface RecordRepository extends JpaRepository<Record, Long>{
 
 	List<Record> findAll();
+	Record findByPatientPatientsIdAndVisitDate(String patientsId, Date visitDate);
 
     Page<Record> findByPatientPatientsId(String patientsId, Pageable paging);
     Page<Record> findByPatientPatientsIdOrPatientLastName(String patientsId, String lastName, Pageable paging);

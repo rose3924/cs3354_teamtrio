@@ -20,7 +20,8 @@ public class PatientSearchController {
 
 	@GetMapping("patientsearch")
 	public ModelAndView getByPatientID(@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "btnClear", required = false) String btnClear, 
+			@RequestParam(value = "btnClear", required = false) String btnClear,
+			@RequestParam(value = "newvisit", required = false) String newvisit,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "3") int size) {
 		ModelAndView mav = new ModelAndView("patientsearch");
@@ -37,6 +38,9 @@ public class PatientSearchController {
 			else {
 				pagePatients = service.findAll(paging);
 			}
+			if((newvisit != null) && newvisit.equals("") == false ) {
+                mav.addObject("newvisit", true);
+            }
 			// ModelAndView::addObject; Model::addAttribute
 			mav.addObject("patients", pagePatients.getContent());
 			mav.addObject("currentPage", pagePatients.getNumber() + 1);

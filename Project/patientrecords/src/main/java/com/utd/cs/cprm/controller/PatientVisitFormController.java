@@ -44,7 +44,13 @@ public class PatientVisitFormController {
                 
                 long millis = System.currentTimeMillis(); 
                 java.sql.Date date = new java.sql.Date(millis);
-                formData.setupRecord(p, date, "New Visit");
+                Record r = recService.findByPatientsIdAndVisitDate(keyword, date);
+                if (r != null) {
+                	formData.setRecord(r);
+                }
+                else {
+                	formData.setupRecord(p, date, "New Visit");
+                }
         	}
         	else {
         		mav.addObject("message", "Patient Id is required.");

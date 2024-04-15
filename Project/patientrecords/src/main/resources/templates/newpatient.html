@@ -16,6 +16,19 @@
 
 	<div class="container ">
 		<h3 class="title is-3 ml-2">Patient Information</h3>
+		<div th:if="${warningmessage}">
+			<div class="block  ml-1">
+				<article class="message is-warning">
+					<div class="message-header">
+						<p>Warning</p>
+						<button class="delete" aria-label="delete"></button>
+					</div>
+					<div class="message-body">
+						<p th:text="${warningmessage}"></p>
+					</div>
+				</article>
+			</div>
+		</div>
 		<form th:action="@{/registerpatient}" method="post"
 			th:object="${formData}">
 			<div

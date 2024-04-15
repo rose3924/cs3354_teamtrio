@@ -1,5 +1,6 @@
 package com.utd.cs.cprm.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class RecordService {
     public Page<Record> findAll(Pageable paging) {
         Page<Record> list = recordrepo.findAll(paging);
         return list;
+    }
+    
+    public Record findByPatientsIdAndVisitDate(String patientsId, Date visitDate) {
+        Record r = recordrepo.findByPatientPatientsIdAndVisitDate(patientsId, visitDate);
+        return r;
     }
 
     public Page<Record> findByPatientId(String patientId, Pageable paging) {
