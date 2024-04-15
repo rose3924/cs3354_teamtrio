@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="columns ml-1"
+	th:fragment="columnsmapwithlist( title, description, key, symptoms)">
+	<div class="column mb-3 box">
+
+		<div class="columns">
+			<div class="column">
+				<div class="title is-5">
+					<p>[[${title}]]</p>
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="column">
+				<div class="subtitle is-6">
+					<p>[[${description}]]</p>
+				</div>
+			</div>
+		</div>
+
+		<div th:each="conditionmap, columnStat : ${symptoms}">
+			<!-- First ROW  -->
+			<div class="columns">
+
+				<div class="column" th:each="condition: ${conditionmap.value}">
+					<div class="level">
+						<div class="level-item">
+							<div class="container">
+								<label class="checkbox"> <input type="checkbox"
+									th:name="${key} + ${condition.id}" th:text="${condition.name}">
+								</label>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>

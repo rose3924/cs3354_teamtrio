@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>The Team - Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<div class="container ">
+		<h3 class="title is-3 ml-2">Patient Information</h3>
+		<form th:action="@{/recordverifiy}" method="post"
+			th:object="${formData}">
+
+
+			<div
+				th:replace="~{fragments/patientInformation :: patientInformation(${formData})}"></div>
+
+			<div
+				th:replace="~{fragments/insuranceInformation :: insuranceInformation( ${formData}, ${insurancecompanies})}"></div>
+
+			<div class="columns ">
+				<div class="column">
+					<div class="field">
+						<div class="field-label is-medium has-text-left">
+							<label class="label">List symptoms you experienced with
+								in the past six weeks.</label>
+						</div>
+						<div class="control">
+							<textarea class="textarea" rows="3" th:field="*{patientComments}"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="columns ">
+				<div class="column">
+					<div class="field">
+						<div class="field-label is-medium has-text-left">
+							<label class="label">List conditions experienced by
+								immediate relatives (mother, father, brothers, sisters,
+								grandparents, aunts, uncles).</label>
+						</div>
+						<div class="control">
+							<textarea class="textarea" rows="3"
+								th:field="*{patientsRelativeConditions}"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="columns">
+				<div class="column is-full  has-text-centered">
+					<button class="button" type="submit">Complete</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

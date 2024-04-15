@@ -38,6 +38,9 @@ public class Record {
     @Column(name="symptoms", length = 250)
     private String symptoms;
 
+    @Column(name="relatives_conditions", length = 250)
+    private String relativesConditions;
+    
     @Column(name="nurse_comments", length = 500)
     private String nurseComments;
 
@@ -64,8 +67,11 @@ public class Record {
 		this.visitDate = visitDate;
 	}
 
+	
+
 	public Record(Long id, Patient patient, Float temperature, Float weight, String description, String symptoms,
-			String nurseComments, String doctorAnalysis, Date visitDate, User nurse, User doctor) {
+			String relativesConditions, String nurseComments, String doctorAnalysis, Date visitDate, User nurse,
+			User doctor) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -73,13 +79,13 @@ public class Record {
 		this.weight = weight;
 		this.description = description;
 		this.symptoms = symptoms;
+		this.relativesConditions = relativesConditions;
 		this.nurseComments = nurseComments;
 		this.doctorAnalysis = doctorAnalysis;
 		this.visitDate = visitDate;
 		this.nurse = nurse;
 		this.doctor = doctor;
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -167,6 +173,14 @@ public class Record {
 
 	public void setDoctor(User doctor) {
 		this.doctor = doctor;
+	}
+
+	public String getRelativesConditions() {
+		return relativesConditions;
+	}
+
+	public void setRelativesConditions(String relativesConditions) {
+		this.relativesConditions = relativesConditions;
 	}
     
     
