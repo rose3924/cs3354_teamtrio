@@ -48,8 +48,8 @@
 </script>
 
 <body>
-	<div th:replace="fragments/header :: header"></div>
-	<div th:replace="fragments/title :: title"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/title :: title}"></div>
 
 	<div class="block  ml-1">
 		<div th:if="${message != null}"
@@ -151,6 +151,6 @@
 			<span>No patients found!</span>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
