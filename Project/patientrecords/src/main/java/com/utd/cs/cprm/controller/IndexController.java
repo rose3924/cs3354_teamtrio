@@ -49,7 +49,7 @@ public class IndexController {
         redirectView.setContextRelative(true);
         
         if(org != null) {
-        	redirectView.setUrl("home");
+        	redirectView.setUrl("login");
         }
         else {
         	redirectView.setUrl("index");
