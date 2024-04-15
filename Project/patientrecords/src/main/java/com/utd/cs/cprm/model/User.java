@@ -37,9 +37,12 @@ public class User {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public User(String login, String firstName, String lastName, String userRole, Organization organization,
 			String enabled) {
 =======
+=======
+>>>>>>> parent of 0762306 (Megha)
 	
 
 	public User(String login, String password, String firstName, String lastName, String userRole,
