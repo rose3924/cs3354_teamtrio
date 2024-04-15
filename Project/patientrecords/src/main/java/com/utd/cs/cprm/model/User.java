@@ -15,9 +15,6 @@ public class User {
 	@Id
     @Column(name="login")
     private String login;
-	
-	@Column(name="password", length = 25)
-    private String password;
 
     @Column(name="firstname", length = 25)
     private String firstName;
@@ -39,13 +36,20 @@ public class User {
 		super();
 	}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+	public User(String login, String firstName, String lastName, String userRole, Organization organization,
+			String enabled) {
+=======
+=======
+>>>>>>> parent of 0762306 (Megha)
 	
 
 	public User(String login, String password, String firstName, String lastName, String userRole,
 			Organization organization, String enabled) {
+>>>>>>> parent of 0762306 (Megha)
 		super();
 		this.login = login;
-		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userRole = userRole;
@@ -99,14 +103,6 @@ public class User {
 
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
     
     
