@@ -23,7 +23,7 @@ import com.utd.cs.cprm.service.PatientSearchService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
- class NewPatientController {
+ public class NewPatientController {
 
 	@Autowired 
     private InsuranceCompanyService insuranceService; 

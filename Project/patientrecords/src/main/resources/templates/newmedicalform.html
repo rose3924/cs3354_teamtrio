@@ -1,155 +1,100 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>New Medical Personnel Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        form {
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input[type="text"],
-        .form-group input[type="password"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"],
-        .form-group select {
-            width: 90%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .submit-button {
-            text-align: center;
-        }
-        .submit-button button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-button button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+<title>Centralized Patient Record Management</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 
-<h2>New Medical Personnel Registration Form</h2>
+	<h3 class="title is-3 ml-2">New Medical Personnel Registration
+		Form</h3>
 
-<form th:action="@{/registerMedicalPersonnel}" method="post" th:object="${medicalPersonnel}" onsubmit="return validateForm()">
-    
-    <fieldset>
-        <legend>Personal Information</legend>
+	<form th:action="@{/registerMedicalPersonnel}" method="post"
+		th:object="${formData}">
+		<div class="container mx-1 box">
+			<div class="columns ">
+				<div class="column ">
+					<div class="field">
+						<div class="field-label is-small has-text-left">
+							<label class="label">Last Name</label>
+						</div>
+						<div class="control">
+							<input class="input" type="text" placeholder="Lamperouge"
+								th:field="*{user.lastName}">
+						</div>
+					</div>
+				</div>
+				<div class="column is-one-fifth">
+					<div class="field-group">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">Middle Name</label>
+							</div>
+							<div class="control">
+								<input class="input" type="text" placeholder="Lamperouge"
+									th:field="*{user.middleName}">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<div class="field-group">
+						<div class="field">
+							<div class="field-label is-small has-text-left">
+								<label class="label">First Name</label>
+							</div>
+							<div class="control">
+								<input class="input" type="text" placeholder="Lelouch"
+									th:field="*{user.firstName}">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column is-2">
+					<div class="field ">
+						<div class="field-label is-small has-text-left">
+							<label class="label">Date of Birth</label>
+						</div>
+						<div class="control">
+							<input class="input" type="date" th:field="*{user.dateOfBirth}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="columns ">
+				<div class="column ">
+					<div class="field">
+						<label class="label">Organization</label>
+						<div class="control">
+							<div class="select">
+								<select th:field="*{user.organization.id}">
+									<option th:each="org : ${organizations}" th:value="${org.id}"
+										th:text="${org.name}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container mx-1 box"></div>
 
-        <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required />
-        </div>
 
-        <div class="form-group">
-            <label for="middleName">Middle Name:</label>
-            <input type="text" id="middleName" name="middleName" th:field="*{middleName}" />
-        </div>
 
-        <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required />
-        </div>
-
-        <div class="form-group">
-            <label for="personnelType">Medical Personnel Type:</label>
-            <select id="personnelType" name="personnelType" th:field="*{role}" required>
-                <option value="Doctor">Doctor</option>
-                <option value="Nurse">Nurse</option>
-                <option value="Staff">Staff</option>
-            </select>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Account Details</legend>
-
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" th:field="*{username}" required />
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" th:field="*{password}" required />
-        </div>
-
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required />
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Contact Information</legend>
-
-        <div class="form-group">
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" th:field="*{email}" required />
-        </div>
-
-        <div class="form-group">
-            <label for="department">Department:</label>
-            <input type="text" id="department" name="department" th:field="*{department}" required />
-        </div>
-
-        <div class="form-group">
-            <label for="mobileNumber">Mobile Number:</label>
-            <input type="tel" id="mobileNumber" name="mobileNumber" th:field="*{mobileNumber}" required />
-        </div>
-    </fieldset>
-
-    <div class="submit-button">
-        <button type="submit">Register</button>
-    </div>
-
-</form>
-
-<script>
-    function validateForm() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirmPassword").value;
-        var email = document.getElementById("email").value;
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return false;
-        }
-
-        // Simple email validation
-        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address!");
-            return false;
-        }
-
-        return true;
-    }
-</script>
-
+		<div class="columns mt-3">
+			<div class="column is-full  has-text-centered">
+				<button class="button" type="submit">Register</button>
+			</div>
+		</div>
+	</form>
 </body>
 </html>

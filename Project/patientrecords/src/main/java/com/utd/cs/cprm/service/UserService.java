@@ -13,7 +13,7 @@ public class UserService {
 
 	@Autowired 
     private UserRepository uRepository; 
-
+	
     public User findByLogin(String login) {
         User u = uRepository.findByLogin(login);
         return u;
@@ -25,5 +25,8 @@ public class UserService {
     public List<User> findAll() {
         List<User> list = uRepository.findAll();
         return list;
+    }
+    public User saveUser(User u) {
+    	return uRepository.save(u);
     }
 }

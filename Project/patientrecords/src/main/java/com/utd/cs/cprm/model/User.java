@@ -1,5 +1,7 @@
 package com.utd.cs.cprm.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +20,9 @@ public class User {
 
     @Column(name="firstname", length = 25)
     private String firstName;
+    
+    @Column(name="middlename", length = 25)
+    private String middleName;
 
     @Column(name="lastname", length = 35)
     private String lastName;
@@ -31,22 +36,58 @@ public class User {
 
     @Column(length = 1)
     private String enabled;
+    
+    @Column(name="password", length = 25)
+    private String password;
+    
+    @Column(name="mobile_number", length = 18)
+    private String mobileNumber;
+    
+    @Column(name="date_of_birth ")
+    private Date dateOfBirth;
 
 	public User() {
 		super();
 	}
 	
 
-	public User(String login, String password, String firstName, String lastName, String userRole,
-			Organization organization, String enabled) {
+
+
+
+	public User(String login, String firstName, String middleName, String lastName, String userRole,
+			Organization organization, String enabled, String password, String mobileNumber, Date dateOfBirth) {
 		super();
 		this.login = login;
 		this.firstName = firstName;
+		this.middleName = middleName;
 		this.lastName = lastName;
 		this.userRole = userRole;
 		this.organization = organization;
 		this.enabled = enabled;
+		this.password = password;
+		this.mobileNumber = mobileNumber;
+		this.dateOfBirth = dateOfBirth;
 	}
+
+
+
+
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+
+
+
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+
+
+
 
 	public String getLogin() {
 		return login;
@@ -94,6 +135,40 @@ public class User {
 
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
+	}
+
+
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
     
     
