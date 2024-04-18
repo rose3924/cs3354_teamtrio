@@ -25,6 +25,18 @@
 		<p>State: [[${organization.state}]]</p>
 		<p>Zip Code: [[${organization.zipCode}]]</p>
 	</div>
+
+	<div class="columns">
+		<div class="column">
+			<p class="container">
+				<a th:href="@{/newmedicalform}"> <img class="image" width="256" height="256"
+					th:src="@{/images/NewPatient_001.png}" alt=""> <span
+					class="subtitle">New Medical Professional</span>
+				</a>
+			</p>
+		</div>
+	</div>
+
 	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

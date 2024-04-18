@@ -24,6 +24,19 @@
 		<div class="title is-1">
 			<h1>Centralized Patient Record Management</h1>
 		</div>
+		<div th:if="${warningmessage}">
+            <div class="block  ml-1">
+                <article class="message is-warning">
+                    <div class="message-header">
+                        <p>Warning</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <p th:text="${warningmessage}"></p>
+                    </div>
+                </article>
+            </div>
+        </div>
 		<form action="#" th:action="@{/orgverifiy}" method="post"
 			th:object="${formData}">
 			<div class="field">

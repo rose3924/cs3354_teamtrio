@@ -7,6 +7,9 @@ public class UserForm {
 	private String passverify;
 	
 	public UserForm() {
+		u = new User();
+		u.setEnabled("T");
+		u.setUserRole("user");
 	}
 
 	

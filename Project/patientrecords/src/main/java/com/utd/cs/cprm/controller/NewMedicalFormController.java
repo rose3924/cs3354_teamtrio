@@ -37,12 +37,12 @@ public class NewMedicalFormController {
 		ModelAndView mav = new ModelAndView("newmedicalform");
 		UserForm formData = new UserForm();
 		try {
-			if (login != null && login.equals("") == false) {
+			/*if (login != null && login.equals("") == false) {
 				User u = userService.findByLogin(login);
 				if (u != null) {
 					formData.setUser(u);
 				}
-			}
+			}*/
 
 			mav.addObject("formData", formData);
 			mav.addObject("organizations", orgService.findAll());
@@ -63,10 +63,13 @@ public class NewMedicalFormController {
 		RedirectView redirectView = new RedirectView();
 		redirectView.setContextRelative(true);
 		redirectView.setUrl("/home");
+		
+		System.out.println("IN /register POST method " );
 		try {
 			boolean validData = true;
-			if (formData != null) {
 				String ss = formData.getUser().getLogin();
+				
+				System.out.println("IN /register POST method start " + ss );
 				if (ss.equals("")) {
 					model.addFlashAttribute("warningmessage", "Login should not be emtpy");
 					validData = false;
@@ -102,9 +105,9 @@ public class NewMedicalFormController {
 						formData.getUser().setOrganization(c.get());
 					}
 					userService.saveUser(formData.getUser());
+					System.out.println("IN /register POST method saved " );
+
 				}
-				
-			}
 
 		} catch (Exception e) {
 			model.addFlashAttribute("warningmessage", e.getMessage());
