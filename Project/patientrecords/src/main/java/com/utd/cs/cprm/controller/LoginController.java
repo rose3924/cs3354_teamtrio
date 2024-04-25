@@ -1,5 +1,7 @@
 package com.utd.cs.cprm.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.utd.cs.cprm.model.User;
+import com.utd.cs.cprm.model.Organization;
+import com.utd.cs.cprm.service.OrganizationService;
 import com.utd.cs.cprm.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class LoginController {
@@ -18,6 +24,8 @@ public class LoginController {
 	@Autowired 
     private UserService uService;
 
+	@Autowired
+    private OrganizationService orgService;
 
     @GetMapping("login")
     public ModelAndView getLoginPage() {
@@ -31,7 +39,7 @@ public class LoginController {
     }
 
     @PostMapping("/verifyuserlogin")
-    public RedirectView verifyLogin(RedirectAttributesModelMap model, @ModelAttribute("user") User user) {
+    public RedirectView verifyLogin(HttpServletRequest request,RedirectAttributesModelMap model, @ModelAttribute("user") User user) {
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
         redirectView.setUrl("/home");
@@ -44,13 +52,22 @@ public class LoginController {
             System.out.println("User.getPassword=" + upwd);
 
             User verificationUser = uService.findByLogin(uLogin);
+            System.out.println("User.getLogin=" + verificationUser.getLogin());
             if(verificationUser.getPassword().equals(upwd) == false) {
             	redirectView.setUrl("/login");
                 model.addFlashAttribute("warningmessage", "Invalid credentials.");
+            } else {
+                Long orgId = verificationUser.getOrganization().getId();
+                Optional<Organization> c = orgService.findById(orgId);
+                if (c != null) {
+                    verificationUser.setOrganization(c.get());
+                }
+                request.getSession().setAttribute("user", verificationUser);
             }
 
         } catch (Exception e) {
-            model.addFlashAttribute("warningmessage", e.getMessage());
+        	redirectView.setUrl("/login");
+            model.addFlashAttribute("warningmessage", "Invalid User Information");
             System.out.println(e.getMessage());
         } 
 

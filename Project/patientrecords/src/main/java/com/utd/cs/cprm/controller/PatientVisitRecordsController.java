@@ -37,6 +37,9 @@ public class PatientVisitRecordsController {
             {
                 pageRecords = recservice.findAll(paging);
             }
+            if((keyword != null) && keyword.equals("") == false ) {
+                mav.addObject("keyword", keyword);
+            }
             mav.addObject("records", pageRecords.getContent());
             mav.addObject("currentPage", pageRecords.getNumber() + 1);
             mav.addObject("totalItems", pageRecords.getTotalElements());

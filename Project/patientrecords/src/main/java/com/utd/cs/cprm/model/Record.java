@@ -66,7 +66,6 @@ public class Record {
 		this.description = description;
 		this.visitDate = visitDate;
 	}
-
 	
 
 	public Record(Long id, Patient patient, Float temperature, Float weight, String description, String symptoms,

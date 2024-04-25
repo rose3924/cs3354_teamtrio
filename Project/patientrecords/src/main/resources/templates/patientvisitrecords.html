@@ -133,8 +133,8 @@
 						<td>[[${record.patient.lastName}]]</td>
 						<td>[[${record.temperature}]]</td>
 						<td>[[${record.weight}]]</td>
-						<td>[[${record.nurse.lastName}]]</td>
-						<td>[[${record.doctor.lastName}]]</td>
+						<td>[[${record.nurse?.lastName}]]</td>
+						<td>[[${record.doctor?.lastName}]]</td>
 						<td><a
 							th:href="@{/patientvisitform?keyword=} + ${record.patient.patientsId}"
 							class="btn btn-primary"> <span class="icon is-medium"><i
@@ -193,7 +193,13 @@
 
 		<div class="content"
 			th:unless="${records != null && records.size() > 0}">
-			<span>No patients found!</span>
+			<span th:if="${records == null or records.size() == 0}"> No
+				forms found! <a th:href="@{/patientvisitform(keyword=${keyword})}"
+				class="btn btn-primary"> <span class="icon is-medium"><i
+						class="fas fa-stream"></i></span>
+			</a>
+			</span>
+
 		</div>
 	</div>
 
