@@ -21,6 +21,7 @@
 		<form th:action="@{/registervisitrecord}" method="post"
 			th:object="${formData}">
 			<input class="input" type="hidden" th:field="*{record.patient.patientsId}">
+			<div th:replace="~{fragments/symptomsandconditions :: symptomsandconditions(formData)}"></div>
 			<div class="container mx-1 box">
 				<div class="columns ">
 					<div class="column is-one-fifth">

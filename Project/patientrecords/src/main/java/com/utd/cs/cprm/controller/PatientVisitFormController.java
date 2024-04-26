@@ -1,5 +1,7 @@
 package com.utd.cs.cprm.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +36,8 @@ public class PatientVisitFormController {
     private RecordService recService;
 	
 	@GetMapping("patientvisitform")
-    public ModelAndView getVisitData(HttpServletRequest request,  @RequestParam(value = "keyword", required = false) String keyword) {
+    public ModelAndView getVisitData(HttpServletRequest request,  @RequestParam(value = "keyword", required = true) String keyword, 
+    		@RequestParam(value = "date", required = false) String d) {
 		ModelAndView mav = new ModelAndView("patientvisitform");
         PatientFormData formData = new PatientFormData();
         try {
@@ -44,6 +47,9 @@ public class PatientVisitFormController {
                 
                 long millis = System.currentTimeMillis(); 
                 java.sql.Date date = new java.sql.Date(millis);
+                if(d != null && d.equals("") == false) {
+                    date = Date.valueOf(d);
+                }
                 Record r = recService.findByPatientsIdAndVisitDate(keyword, date);
                 if (r != null) {
                 	formData.setRecord(r);
@@ -74,8 +80,16 @@ public class PatientVisitFormController {
             System.out.println("Record.PatientsId=" + pId);
             Patient p = patientService.getByPatientsId(pId);
 
-            Record r = formData.getRecord();
-            r.setPatient(p);
+            Record r = recService.findByPatientsIdAndVisitDate(pId, formData.getRecord().getVisitDate());
+            if (r == null) {
+            	r = formData.getRecord();
+            	System.out.println("THE IF R WAS NULL");
+            }
+            else {
+            System.out.println("LINE 83 RecordId r = " + r.getId());
+            formData.getRecord().setId(r.getId());
+            }
+            formData.getRecord().setPatient(p);
         	
         	String uDocId = formData.getRecord().getDoctor().getLogin();
         	User uDoc = userService.findByLogin(uDocId);
@@ -84,7 +98,7 @@ public class PatientVisitFormController {
         	String uNurseId = formData.getRecord().getNurse().getLogin();
         	User uNurse = userService.findByLogin(uNurseId);
         	formData.getRecord().setNurse(uNurse);
-        	System.out.println("Set the User properties, about to call saveRecord() ");
+        	System.out.println("Set the User properties, about to call saveRecord() formData=" + formData.getRecord().getId());
         	recService.saveRecord(formData.getRecord());
         	System.out.println("Set the User properties, finished calling saveRecord() ");
         } catch (Exception e) {

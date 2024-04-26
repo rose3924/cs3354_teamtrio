@@ -35,10 +35,10 @@ public class Record {
     @Column(name="description", length = 500)
     private String description;
     
-    @Column(name="symptoms", length = 250)
+    @Column(name="symptoms", length = 500)
     private String symptoms;
 
-    @Column(name="relatives_conditions", length = 250)
+    @Column(name="relatives_conditions", length = 500)
     private String relativesConditions;
     
     @Column(name="nurse_comments", length = 500)

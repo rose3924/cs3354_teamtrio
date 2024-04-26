@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container mx-1 box"
+	th:fragment="symptomsandconditions(formData)">
+
+	<div class="columns ">
+		<div class="column">
+			<div class="field">
+				<div class="field-label is-medium has-text-left">
+					<label class="label">List conditions experienced by
+						immediate relatives (mother, father, brothers, sisters,
+						grandparents, aunts, uncles).</label>
+				</div>
+				<div class="control">
+					<textarea class="textarea" rows="3"
+						th:field="*{record.relativesConditions}"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

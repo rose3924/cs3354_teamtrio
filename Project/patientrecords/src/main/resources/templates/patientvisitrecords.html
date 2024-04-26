@@ -140,6 +140,10 @@
 							class="btn btn-primary"> <span class="icon is-medium"><i
 									class="fas fa-user-md"></i></span></a></td>
 						<td><a
+							th:href="@{/patientvisitform?keyword=} + ${record.patient.patientsId} + @{&date=} + ${record.visitDate}"
+							class="btn btn-primary"> <span class="icon is-medium"><i
+									class="fas fa-clinic-medical"></i></span></a></td>
+						<td><a
 							th:href="@{/intakeform?keyword=} + ${record.patient.patientsId}"
 							class="btn btn-primary"> <span class="icon is-medium"><i
 									class="fas fa-stream"></i></span></a></td>
@@ -196,7 +200,12 @@
 			<span th:if="${records == null or records.size() == 0}"> No
 				forms found! <a th:href="@{/patientvisitform(keyword=${keyword})}"
 				class="btn btn-primary"> <span class="icon is-medium"><i
-						class="fas fa-stream"></i></span>
+						class="fas fa-otter"></i></span>
+			</a>
+			<a th:href="@{/intakeform(keyword=${keyword})}"
+				class="btn btn-primary"> <span class="icon is-medium"><i
+						class="fas fa-kiwi-bird"></i></span>
+						
 			</a>
 			</span>
 
